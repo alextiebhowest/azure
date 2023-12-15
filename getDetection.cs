@@ -7,23 +7,20 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Net.NetworkInformation;
 
 namespace Howest.Function
 {
-    public static class addLocation
+    public static class getDetection
     {
-        [FunctionName("addLocation")]
-        public static async Task<IActionResult> AddLocation(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "locations/addLocations")] HttpRequest req,
+        [FunctionName("getDetection")]
+        public static async Task<IActionResult> Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "detections")] HttpRequest req,
             ILogger log)
         {
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            
-
-            Location location = JsonConvert.DeserializeObject<Location>(requestBody);
-
-            return new OkObjectResult(location);
+            detection detection = JsonConvert.DeserializeObject<detection>(requestBody);
+            return new OkObjectResult(detection);
         }
     }
 }

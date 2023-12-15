@@ -10,19 +10,16 @@ using Newtonsoft.Json;
 
 namespace Howest.Function
 {
-    public static class addLocation
+    public static class droneNewTarget
     {
-        [FunctionName("addLocation")]
-        public static async Task<IActionResult> AddLocation(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "locations/addLocations")] HttpRequest req,
+        [FunctionName("droneNewTarget")]
+        public static async Task<IActionResult> DroneNewTarget(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "/deviceId/countrycode/targetId")] HttpRequest req,
             ILogger log)
         {
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             
-
             Location location = JsonConvert.DeserializeObject<Location>(requestBody);
-
             return new OkObjectResult(location);
         }
     }
