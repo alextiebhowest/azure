@@ -14,7 +14,7 @@ namespace Howest.Function
     {
         [FunctionName("droneNewTarget")]
         public static async Task<IActionResult> DroneNewTarget(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "/deviceId/countrycode/targetId")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "deviceId/countrycode/targetId")] HttpRequest req,
             ILogger log)
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
